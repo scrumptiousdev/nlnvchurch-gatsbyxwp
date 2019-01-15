@@ -1,0 +1,21 @@
+.footer {
+  position: relative;
+  background-color: $darkgreen;
+  color: $secondary-text;
+  text-align: center;
+  padding: 3rem 2rem;
+  font-weight: 300;
+  &__copyright {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+  }
+  &__credit {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer__copyright {
+    font-size: 1.25rem;
+  }
+}

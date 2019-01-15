@@ -1,0 +1,174 @@
+.card {
+  &__container {
+    position: relative;
+    z-index: 1;
+    display: block;
+    background: $primary-bg;
+    height: 470px;
+    margin-bottom: 3rem;
+    box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s linear 0s;
+    &:hover {
+      box-shadow: 0px 1px 35px 0px rgba(0, 0, 0, 0.3);
+      .card__image {
+        transform: scale(1.1);
+        opacity: 0.6;
+      }
+    }
+  }
+  &__thumbnail {
+    background: $primary-bg;
+    height: 285px;
+    overflow: hidden;
+  }
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.3s linear 0s;
+  }
+  &__content {
+    position: absolute;
+    bottom: 0;
+    background: $primary-bg;
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05);
+  }
+  &__category {
+    position: absolute;
+    top: -38px;
+    left: 0;
+    background: $orange;
+    padding: 10px 15px;
+    color: $secondary-text;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+  }
+  &__title {
+    margin: 0;
+    padding: 0 0 10px;
+    color: $primary-text;
+    font-size: 2.75rem;
+    font-weight: 700;
+  }
+  &__subtitle {
+    margin: 0;
+    padding: 0 0 20px;
+    color: $orange;
+    font-size: 1.75rem;
+    font-weight: 400;
+  }
+  &__btn {
+    background-color: $transparent;
+    color: $orange;
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1.35rem;
+    font-weight: 600;
+    transition: 0.3s all;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    text-align: center;
+    border: 2px solid $orange;
+
+    &:active,
+    &:focus,
+    &:hover {
+      text-decoration: none;
+      color: $secondary-text;
+      background-color: $orange;
+    }
+  }
+  &__description {
+    display: none;
+    color: $grey;
+    font-size: 1.5rem;
+    line-height: 1.8em;
+    p {
+      margin: 0;
+    }
+  }
+  &__cta {
+    margin: 30px 0 0;
+    color: $grey;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card__container:hover .card__image {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 415px) and (max-width: 768px) {
+  .card {
+    &__col {
+      width: 100%;
+      margin: auto;
+    }
+    &__container {
+      height: 285px;
+      &:hover .card__image {
+        transform: none;
+        opacity: 1;
+      }
+    }
+    &__thumbnail,
+    &__content {
+      width: 50%;
+    }
+    &__content {
+      top: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    &__category {
+      top: 0;
+      left: -100%;
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .card {
+    &__title {
+      font-size: 2.5rem;
+    }
+    &__category {
+      top: -38px;
+    }
+    &__subtitle {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card {
+    &__container {
+      height: 350px;
+    }
+    &__thumbnail {
+      height: 250px;
+    }
+    &__title {
+      font-size: 2.25rem;
+    }
+    &__category {
+      top: -38px;
+    }
+    &__subtitle {
+      font-size: 1.25rem;
+    }
+    &__cta {
+      margin-top: 15px;
+    }
+  }
+}

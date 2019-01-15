@@ -1,0 +1,20 @@
+@mixin generate-spacing($property) {
+  @each $dir in $directions {
+    &-#{$dir} {
+      @each $size, $value in $sizes {
+        &-#{$size} {
+          #{$property}-#{$dir}: $value;
+        }
+        @each $device, $width in $media {
+          @each $point in $breakpoint {
+            @media (#{$point}-width: $width) {
+              &-#{$size}-#{$point}-#{$device} {
+                #{$property}-#{$dir}: $value;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

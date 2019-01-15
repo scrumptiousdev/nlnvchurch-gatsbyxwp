@@ -1,0 +1,56 @@
+.series__card {
+  &-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  &-icon.fa {
+    display: none;
+    font-size: 5rem;
+    margin-right: 2rem;
+    color: $darkgreen;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .series__card {
+    &-icon.fa {
+      display: inline-block;
+    }
+    &-list {
+      height: auto;
+      border-top: 2px solid $lightgrey;
+      padding: 0;
+      .messages__card-inner {
+        display: flex;
+        align-items: center;
+        color: $primary-text;
+        border: none;
+        padding: 10px;
+        background-image: none !important;
+        &:before {
+          display: none;
+        }
+        &.active {
+          border: none;
+        }
+      }
+      .messages__card-date {
+        display: none;
+      }
+      .messages__card-content {
+        align-items: baseline;
+      }
+      .messages__card-desc {
+        text-align: left;
+        padding: 0;
+        margin: 5px 0;
+      }
+      .messages__card-status {
+        margin: 5px 0;
+      }
+      .messages__card-icon {
+        display: none;
+      }
+    }
+  }
+}

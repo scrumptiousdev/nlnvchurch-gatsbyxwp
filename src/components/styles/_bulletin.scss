@@ -1,0 +1,56 @@
+.bulletin__card {
+  text-align: center;
+  padding: 0 15px;
+  margin-bottom: 5.85rem;
+  &-img {
+    &-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 0;
+      position: relative;
+      max-width: 100%;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        transition: all 0.15s;
+        z-index: 1;
+      }
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+        color: $darkgrey;
+        .bulletin__card-icon {
+          opacity: 1;
+        }
+        &:before {
+          opacity: 1;
+          border-width: 7px;
+        }
+      }
+    }
+  }
+  &-icon.fa {
+    position: absolute;
+    z-index: 2;
+    font-size: 5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    color: $darkgrey;
+  }
+  &-title {
+    font-size: 1.5rem;
+    display: block;
+    margin-top: 0.8rem;
+    padding: 0 10px;
+    text-decoration: none;
+    letter-spacing: -0.4px;
+  }
+}

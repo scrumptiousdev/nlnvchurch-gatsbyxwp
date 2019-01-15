@@ -1,0 +1,47 @@
+// Colors
+$green: #00C28C;
+$darkgreen: #009B70;
+$white: #ffffff;
+$offwhite: #f5f5f5;
+$darkgrey: #333333;
+$grey: #666666;
+$lightgrey: #e5ecef;
+$blue: #1E344D;
+$gold: #FFEBB2;
+$black: #000000;
+$orange: #FF7860;
+$transparent: rgba(255, 255, 255, 0);
+
+// Texts
+$primary-text: $darkgrey;
+$secondary-text: $white;
+$tertiary-text: $green;
+
+// Backgrounds
+$primary-bg: $white;
+$secondary-bg: $blue;
+$tertiary-bg: $darkgrey;
+
+// Calculations
+$nav-width: 105px;
+
+// Mixin vars
+$sizes: (
+    none: 0,
+    xs: 0.5em,
+    sm: 1em,
+    md: 1.5em,
+    lg: 2em,
+    xl: 3em,
+    xxl: 4em,
+    xxxl: 5em
+);
+$media: (
+    smallest: 320px,
+    smartphones: 479px,
+    tablet: 768px,
+    desktop: 992px,
+    largest: 1199px
+);
+$directions: (top, right, bottom, left);
+$breakpoint: (min, max);

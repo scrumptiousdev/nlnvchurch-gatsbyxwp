@@ -1,0 +1,202 @@
+.nav {
+  background-color: #ffffff;
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: $nav-width;
+  box-shadow: 2px 0px 5px 1px rgba(0,0,0,0.25);
+  z-index: 10;
+  opacity: 0;
+  left: -20px;
+  transition: 0.5s all;
+  transition-timing-function: ease;
+  &__overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 5;
+  }
+  &__link {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: $primary-text;
+    text-align: center;
+    padding: 1.3rem;
+    border-bottom: 1px solid $lightgrey;
+    &.active {
+      cursor: no-drop;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+      color: $green;
+      &:before {
+        left: 0;
+      }
+      .nav__text {
+        color: $green;
+      }
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: $offwhite;
+      z-index: -1;
+      transition: 0.3s left;
+    }
+    &-logo {
+      background-color: $green;
+      transition: 0.5s background-color;
+      padding: 2rem 1rem;
+      .nav__text {
+        font-weight: 100;
+        font-size: 3.5rem;
+        color: $secondary-text;
+      }
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+        background-color: $darkgreen;
+        &:before {
+          left: -100%;
+        }
+        .nav__text {
+          color: $secondary-text;
+        }
+      }
+    }
+    &-mobile {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: $nav-width;
+      border: none;
+      background-color: $darkgreen;
+      font-size: 3rem;
+      padding: 1rem 1.5rem !important;
+      color: $secondary-text;
+      &:hover,
+      &:active,
+      &focus {
+        color: $secondary-text;
+      }
+    }
+  }
+  & .nav__icon {
+    font-size: 2.25rem;
+  }
+  &__text {
+    color: $primary-text;
+    font-size: 1.4rem;
+    margin: 0.5rem 0 0;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  &__social {
+    display: block;
+    line-height: 1;
+    padding: 2rem 1rem 0;
+    font-size: 2.75rem;
+    color: $green;
+    text-align: center;
+    &:hover,
+    &:focus,
+    &:active {
+      color: $darkgreen;
+    }
+  }
+}
+
+body.loaded {
+  .nav {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-height: 740px) {
+  .nav {
+    &__link-logo .nav__text {
+      font-size: 3rem;
+    }
+    & .nav__icon {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-height: 625px) {
+  .nav {
+    &__text {
+      margin-top: 0;
+    }
+    &__link-logo .nav__text {
+      font-size: 3rem;
+    }
+    & .nav__icon {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .nav {
+    left: -$nav-width;
+    box-shadow: none;
+
+    &__link-mobile {
+      display: block;
+    }
+  }
+  body.loaded {
+    .nav {
+      left: -$nav-width;
+      &.opened {
+        left: 0;
+      }
+      &__overlay.opened {
+        display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .nav {
+    &__link {
+      padding: 1rem;
+      &-logo {
+        padding: 1.5rem 1rem;
+        .nav__text {
+          font-size: 2.75rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .nav {
+    &__link {
+      padding: 1.5rem 1rem;
+    }
+    &__icon.fa {
+      display: none;
+    }
+  }
+}

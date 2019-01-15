@@ -1,0 +1,79 @@
+.connect {
+  &__container {
+    position: relative;
+    height: 500px;
+  }
+  &__wrapper {
+    height: 100%;
+    background-image: url(/images/subscription-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: $secondary-text;
+    & > * {
+      position: relative;
+    }
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(120, 120, 120, 0.6);
+    }
+  }
+  &__icon {
+    color: $secondary-text;
+    font-size: 4rem;
+    transition: 0.3s transform;
+    &-wrapper {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      max-width: 300px;
+      &--full {
+        width: 100% !important;
+        max-width: none !important;
+        justify-content: space-evenly;
+      }
+      &--dark .connect__icon {
+        color: $primary-text;
+        font-size: 3rem;
+        &:hover {
+          color: $primary-text;
+        }
+      }
+    }
+    &:hover {
+      color: $secondary-text;
+      transform: scale(1.2);
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .connect__container {
+    height: 700px;
+  }
+}
+
+@media (max-width: 414px) {
+  .connect {
+    &__container {
+      height: 300px;
+    }
+    &__icon {
+      font-size: 3rem;
+      &-wrapper {
+        max-width: 250px;
+      }
+    }
+  }
+}
