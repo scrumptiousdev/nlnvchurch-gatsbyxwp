@@ -6,27 +6,25 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './all.scss'
 
 class TemplateWrapper extends Component {
-  enter = () => {
+  componentDidMount() {
     document.body.classList.add('loaded')
   }
 
-  exit = () => {
+  componentWillUnmount() {
     document.body.classList.remove('loaded')
   }
 
   render() {
-    const { children } = this.props;
-
-    this.enter()
+    const { children } = this.props
 
     return (
       <>
         <Helmet title="New Life New Vision Church" />
         <Nav />
-        <div class="nlnv__container">
+        <div className="nlnv__container">
           {children}
         </div>
-        <div class="nlnv__container">
+        <div className="nlnv__container">
           <Footer />
         </div>
       </>

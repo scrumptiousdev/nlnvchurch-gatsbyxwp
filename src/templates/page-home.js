@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 
-export const PageTemplate = ({ title, content }) => {
+export const HomePage = ({ title, content }) => {
   return (
     <section className="section section--gradient">
       <div className="container">
@@ -25,7 +25,7 @@ export const PageTemplate = ({ title, content }) => {
   )
 }
 
-PageTemplate.propTypes = {
+HomePage.propTypes = {
   title: PropTypes.string.isRequired,
   content: PropTypes.string,
 }
@@ -35,7 +35,7 @@ const Page = ({ data }) => {
 
   return (
     <Layout>
-      <PageTemplate title={page.title} content={page.content} />
+      <HomePage title={page.title} content={page.content} />
     </Layout>
   )
 }
@@ -47,7 +47,7 @@ Page.propTypes = {
 export default Page
 
 export const pageQuery = graphql`
-  query PageById($id: String!) {
+  query HomePage($id: String!) {
     wordpressPage(id: { eq: $id }) {
       title
       content

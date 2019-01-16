@@ -28,8 +28,6 @@ exports.createPages = ({ actions, graphql }) => {
         return Promise.reject(result.errors)
       }
 
-      let pageTemplate = path.resolve(`./src/templates/page.js`)
-
       // Only publish pages with a `status === 'publish'` in production. This
       // excludes drafts, future posts, etc. They will appear in development,
       // but not in a production build.
@@ -42,11 +40,19 @@ exports.createPages = ({ actions, graphql }) => {
 
       // Call `createPage()` once per WordPress page
       _.each(pages, ({ node: page }) => {
-        if (page.slug && page.slug === 'about') pageTemplate = path.resolve(`./src/templates/page-about.js`)
+        let pageTemplatePath = `./src/templates/page.js`
+        let pagePath = `/${page.slug}/`;
+
+        if (page.slug && page.slug === 'home') {
+          pagePath = '/'
+          pageTemplatePath = `./src/templates/page-home.js`
+        } else if (page.slug && page.slug === 'about') {
+          pageTemplatePath = `./src/templates/page-about.js`
+        }
 
         createPage({
-          path: `/${page.slug}/`,
-          component: pageTemplate,
+          path: pagePath,
+          component: path.resolve(pageTemplatePath),
           context: {
             id: page.id,
           },
@@ -101,7 +107,7 @@ exports.createPages = ({ actions, graphql }) => {
         createPage,
         items: posts,
         itemsPerPage: 10,
-        pathPrefix: ({ pageNumber }) => (pageNumber === 0 ? `/` : `/page`),
+        pathPrefix: `/page`,
         component: blogTemplate,
       })
     })
