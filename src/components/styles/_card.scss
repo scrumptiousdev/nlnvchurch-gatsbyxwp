@@ -1,7 +1,6 @@
 .card {
   &__container {
     position: relative;
-    z-index: 1;
     display: block;
     background: $primary-bg;
     height: 470px;
@@ -74,6 +73,7 @@
     box-sizing: border-box;
     text-align: center;
     border: 2px solid $orange;
+    cursor: pointer;
 
     &:active,
     &:focus,

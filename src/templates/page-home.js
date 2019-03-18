@@ -1,17 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import moment from 'moment';
 import Layout from '../components/Layout'
+import NewsCard from '../components/NewsCard'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebookSquare, faYoutube } from '@fortawesome/free-brands-svg-icons'
+import { faFilm, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 
 export class HomePage extends Component {
   componentDidMount() {
+    const { homeContent } = this.props;
+    const serviceStartTime = homeContent.nlnv_service_countdown_time.split(':');
     const today = new Date();
     const sunday = new Date();
 
     sunday.setDate(today.getDate() - today.getDay());
-    sunday.setHours(10);
-    sunday.setMinutes(0);
-    sunday.setSeconds(0);
+    sunday.setHours(parseInt(serviceStartTime[0]));
+    sunday.setMinutes(parseInt(serviceStartTime[1]));
+    sunday.setSeconds(parseInt(serviceStartTime[2]));
     sunday.setMilliseconds(0);
 
     if (sunday < today) sunday.setDate(sunday.getDate() + 7);
@@ -35,12 +42,14 @@ export class HomePage extends Component {
   }
 
   render() {
+    const { homeContent, contactContent, videos, news } = this.props;
+
     return (
       <>
         <div className="home__banner">
           <div className="home__banner-text-container">
             <h1 className="home__banner-text">
-              <span className="home__banner-text--sub kor-sub">다음 세대를 위해 교회를 개척하는 교회</span>
+              <span className="home__banner-text--sub kor-sub">{homeContent.nlnv_church_slogan}</span>
               <span className="home__banner-text--main">New Life<span className="break-414"> </span>New Vision<span className="break-414"> </span>Church</span>
             </h1>
             <a className="home__banner-arrow js-scroll" href="#first"><i className="fa fa-angle-double-down" aria-hidden="true"></i></a>
@@ -48,13 +57,12 @@ export class HomePage extends Component {
         </div>
         <div id="first" className="home__container home__service clearfix">
           <div className="col-lg-8 offset-lg-2 text-center">
-            <h2 className="nlnv__heading kor-main">예배 안내</h2>
+            <h2 className="nlnv__heading kor-main">{homeContent.nlnv_service_title}</h2>
             <hr className="divider divider--green" />
-            <p className="home__service-times kor-main"><b>주일예배:</b> 10:00AM (1부) &amp; 12:00PM (2부)</p>
-            <p className="home__service-times kor-main"><b>Sunday School:</b> 12:30PM</p>
-            <p className="home__service-times kor-main"><b>Youth Group:</b> 11:45AM</p>
-            <p className="home__service-times kor-main"><b>수요기도회:</b> 7:00PM</p>
-            <p className="home__service-times kor-main"><b>새벽기도회:</b> 5:30AM (화-금) &amp; 6:30AM (토)</p>
+            <div
+              className="home__service-times kor-main"
+              dangerouslySetInnerHTML={{ __html: homeContent.nlnv_service_time }}
+            />
             <div className="home__join">
               <h2 className="home__join-title">Come <span className="accent--light">Join</span> Us!</h2>
               <h3 className="home__join-time"></h3>
@@ -63,29 +71,29 @@ export class HomePage extends Component {
             </div>
           </div>
         </div>
-        {/* @if($ytvid) */}
         <div className="home__container home__message clearfix">
           <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            {/* @if($ytvid->series_id !== 1) */}
-            <h2 className="home__message-title">주일 설교영상</h2>
-            <a className="home__message-btn kor-main js-transition" href="/series"><i className="fa fa-film" aria-hidden="true"></i> 영상 더보기</a>
-            {/* @else */}
-            <h2 className="home__message-title">5분 설교영상</h2>
-            <a className="home__message-btn kor-main js-transition" href="/messages/{{$ytvid->full_id}}"><i className="fa fa-film" aria-hidden="true"></i> FULL 영상 보기</a>
-            {/* @endif */}
-            <iframe className="home__message-iframe" width="100%" height="500" src="https://www.youtube.com/embed/{{ $ytvid->video_id }}?rel=0" frameBorder="0" allowFullScreen></iframe>
+            <h2 className="home__message-title">{videos.nlnv_series.slug === 'series-5min' ? '5분' : '주일'} 설교영상</h2>
+            <a className="home__message-btn kor-main js-transition" href="/series"><FontAwesomeIcon icon={faFilm} /> 영상 더보기</a>
+            <iframe className="home__message-iframe" width="100%" height="500" src={`https://www.youtube.com/embed/${videos.nlnv_youtube_video_id}?rel=0`} frameBorder="0" allowFullScreen></iframe>
             <hr className="divider divider--green" />
             <div className="home__message-desc text-center kor-main">
-              <p>Video Description</p>
+              <p>{videos.nlnv_video_title_korean}</p>
+              <p>{videos.nlnv_video_title_english}</p>
+              <p>{videos.nlnv_scripture}</p>
+              <p>{moment(videos.nlnv_video_date).format('MMM DD, YYYY')}</p>
             </div>
           </div>
         </div>
-        {/* @endif */}
         <div className="home__container home__container--blue clearfix">
           <div className="col-md-12 col-lg-10 offset-lg-1 text-center">
             <h2 className="nlnv__heading">교회 소식</h2>
             <hr className="divider divider--gold divider--margin-b-lg" />
-            {/* @include('news.cards') */}
+            <div className="container">
+              <div className="row">
+                <NewsCard news={news} />
+              </div>
+            </div>
           </div>
         </div>
         <div className="connect__container">
@@ -93,10 +101,10 @@ export class HomePage extends Component {
             <h2 className="nlnv__heading">Connect with us</h2>
             <hr className="divider divider--darkgreen" />
             <div className="connect__icon-wrapper">
-              <a className="connect__icon" href="mailto:nlnvchurch@gmail.com" target="_blank"><i className="fa fa-envelope" aria-hidden="true"></i></a>
-              <a className="connect__icon" href="tel:310-991-6544"><i className="fa fa-phone" aria-hidden="true"></i></a>
-              <a className="connect__icon" href="https://www.facebook.com/pages/New-Life-New-Vision-Church/754157684605483" target="_blank"><i className="fa fa-facebook" aria-hidden="true"></i></a>
-              <a className="connect__icon" href="https://www.youtube.com/channel/UCdmLI5xDRzZmNVAch8HCyGg" target="_blank"><i className="fa fa-youtube" aria-hidden="true"></i></a>
+              <a className="connect__icon" href={`mailto:${contactContent.nlnv_contact_email}`} target="_blank"><FontAwesomeIcon icon={faEnvelope} /></a>
+              <a className="connect__icon" href={`tel:${contactContent.nlnv_contact_phone}`}><FontAwesomeIcon icon={faPhone} /></a>
+              <a className="connect__icon" href={contactContent.nlnv_social_facebook} target="_blank"><FontAwesomeIcon icon={faFacebookSquare} /></a>
+              <a className="connect__icon" href={contactContent.nlnv_social_youtube} target="_blank"><FontAwesomeIcon icon={faYoutube} /></a>
             </div>
           </div>
         </div>
@@ -106,16 +114,20 @@ export class HomePage extends Component {
 }
 
 HomePage.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string,
+  homeContent: PropTypes.object.isRequired,
+  contactContent: PropTypes.object.isRequired,
+  videos: PropTypes.object.isRequired,
+  news: PropTypes.array.isRequired
 }
 
 const Page = ({ data }) => {
-  const { wordpressPage: page } = data
+  const { allWordpressPage: pages, allWordpressAcfMessages: videos, allWordpressAcfNews: news } = data
+  const homePage = pages.edges[0];
+  const contactPage = pages.edges[1];
 
   return (
     <Layout>
-      <HomePage title={page.title} content={page.content} />
+      <HomePage homeContent={homePage.node.acf} contactContent={contactPage.node.acf} videos={videos.edges[0].node.acf} news={news.edges} />
     </Layout>
   )
 }
@@ -128,9 +140,86 @@ export default Page
 
 export const pageQuery = graphql`
   query HomePage($id: String!) {
-    wordpressPage(id: { eq: $id }) {
-      title
-      content
+    allWordpressPage(
+      filter: {
+        id: {
+          in: [$id, "4335bc5c-e4aa-50ae-98a7-0c36e4e8004f"]
+        }
+      }
+      sort: {
+        fields: wordpress_id
+        order: ASC
+      }
+    ) {
+      edges {
+        node {
+          acf {
+            nlnv_church_slogan
+            nlnv_service_title
+            nlnv_service_time
+            nlnv_service_countdown_time
+            nlnv_contact_email
+            nlnv_contact_phone
+            nlnv_social_youtube
+            nlnv_social_facebook
+          }
+        }
+      }
+    }
+    allWordpressAcfMessages(
+      sort: {
+        fields: acf___nlnv_video_date
+        order: DESC
+      },
+      limit: 1
+    ) {
+      edges {
+        node {
+          acf {
+            nlnv_youtube_video_id
+            nlnv_video_date
+            nlnv_video_title_korean
+            nlnv_video_title_english
+            nlnv_scripture
+            nlnv_series {
+              term_id
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+    allWordpressAcfNews(
+      filter: {
+        acf: {
+          nlnv_news_featured: {
+            eq: true
+          }
+        }
+      }
+      sort: {
+        fields: acf___nlnv_news_date
+        order: DESC
+      }
+      limit: 3
+    ) {
+      edges {
+        node {
+          id
+          acf {
+            nlnv_news_featured
+            nlnv_news_recurring
+            nlnv_news_title
+            nlnv_news_subtitle
+            nlnv_news_details
+            nlnv_news_date
+            nlnv_news_image {
+              source_url
+            }
+          }
+        }
+      }
     }
   }
 `

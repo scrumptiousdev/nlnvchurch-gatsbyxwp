@@ -1,20 +1,26 @@
 import React from 'react'
-import { Link, StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faLeaf, faQuoteRight, faBullhorn, faCameraRetro, faHeart, faMapSigns } from '@fortawesome/free-solid-svg-icons'
-import github from '../img/github-icon.svg'
-import logo from '../img/logo.svg'
 
 const Navbar = () => (
   <StaticQuery
     query={graphql`
       query {
-        allWordpressPage(sort: { fields: wordpress_id }, limit: 5) {
+        allWordpressPage(
+          filter: {
+            title: {
+              eq: "Contact and Social Setting"
+            }
+          }
+        ) {
           edges {
             node {
-              title
-              slug
+              acf {
+                nlnv_social_youtube
+                nlnv_social_facebook
+              }
             }
           }
         }
@@ -22,7 +28,7 @@ const Navbar = () => (
     `}
     render={data => (
       <>
-        <div className="nav__overlay"></div>
+        <div className="nav__overlay" />
         <nav className="nav">
           <a className="js-transition nav__link nav__link-mobile" href="#">
             <FontAwesomeIcon className="" icon={faBars} />
@@ -54,11 +60,10 @@ const Navbar = () => (
             <FontAwesomeIcon className="nav__icon" icon={faMapSigns} />
             <p className="nav__text kor-main">찾아오시는길</p>
           </a>
-
-          <a className="nav__social" title="Facebook" href="https://www.facebook.com/pages/New-Life-New-Vision-Church/754157684605483" target="_blank">
+          <a className="nav__social" title="Facebook" href={data.allWordpressPage.edges[0].node.acf.nlnv_social_facebook} target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon className="nav__icon" icon={faFacebookSquare} />
           </a>
-          <a className="nav__social" title="YouTube" href="https://www.youtube.com/channel/UCdmLI5xDRzZmNVAch8HCyGg" target="_blank">
+          <a className="nav__social" title="YouTube" href={data.allWordpressPage.edges[0].node.acf.nlnv_social_youtube} target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon className="nav__icon" icon={faYoutube} />
           </a>
         </nav>

@@ -1,6 +1,6 @@
 .home__banner {
   position: fixed;
-  background-image: url("/images/nlnv-home-banner.jpg");
+  background-image: url("../img/nlnv-home-banner.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -88,7 +88,7 @@
 .home__service {
   margin-top: 100vh;
   position: relative;
-  background-image: url("/images/nlnv-home-join.jpg");
+  background-image: url("../img/nlnv-home-join.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -105,9 +105,12 @@
     background-color: rgba(0, 0, 0, 0.8);
   }
 
-  &-times {
+  &-times p {
     font-size: 1.75rem;
     font-weight: 200;
+    b, strong {
+      font-weight: bold;
+    }
   }
 }
 
@@ -228,7 +231,7 @@
     }
   }
 
-  .home__service-times {
+  .home__service-times p {
     font-size: 1.5rem;
   }
 
@@ -264,7 +267,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  .home__service-times {
+  .home__service-times p {
     font-size: 1.25rem;
   }
 

@@ -13,7 +13,7 @@ export const AboutPage = ({ title, content, acf }) => {
               <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
                 {acf.nlnv_page_title}
               </h2>
-			  <img src={acf.nlnv_hero_image.source_url} />
+			        <img src={acf.nlnv_hero_image.source_url} />
               <div
                 className="content"
                 dangerouslySetInnerHTML={{ __html: content }}
@@ -54,9 +54,9 @@ export const pageQuery = graphql`
       content
       acf {
         nlnv_page_title
-		nlnv_hero_image {
-			source_url
-		}
+        nlnv_hero_image {
+          source_url
+        }
       }
     }
   }

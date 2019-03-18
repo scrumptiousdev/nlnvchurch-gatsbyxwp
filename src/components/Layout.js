@@ -4,6 +4,7 @@ import Nav from './Nav'
 import Footer from './Footer'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './all.scss'
+import favicon from '../img/favicon.ico'
 
 class TemplateWrapper extends Component {
   componentDidMount() {
@@ -19,7 +20,12 @@ class TemplateWrapper extends Component {
 
     return (
       <>
-        <Helmet title="New Life New Vision Church" />
+        <Helmet
+          title="New Life New Vision Church"
+          link={[
+            { rel: 'shortcut icon', type: 'image/ico', href: `${favicon}` }
+          ]}
+        />
         <Nav />
         <div className="nlnv__container">
           {children}

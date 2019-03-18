@@ -3,7 +3,7 @@
   width: 100%;
   height: 360px;
   padding-bottom: 60px;
-  background-image: url("/images/nlnv-about-banner.jpg");
+  background-image: url("../img/nlnv-about-banner.jpg");
   background-size: cover;
   background-position: center bottom;
   display: flex;
@@ -155,22 +155,22 @@
     font-weight: 700;
   }
   &--leader {
-    background-image: url(/images/about/about-leadership.jpg);
+    background-image: url(../img/about/about-leadership.jpg);
   }
   &--disciple {
-    background-image: url(/images/about/about-biblestudy.jpg);
+    background-image: url(../img/about/about-biblestudy.jpg);
   }
   &--faith {
-    background-image: url(/images/about/about-faith.jpg);
+    background-image: url(../img/about/about-faith.jpg);
   }
   &--pray {
-    background-image: url(/images/about/about-pray.jpg);
+    background-image: url(../img/about/about-pray.jpg);
   }
   &--bible {
-    background-image: url(/images/about/about-bible.jpg);
+    background-image: url(../img/about/about-bible.jpg);
   }
   &--school {
-    background-image: url(/images/about/about-school.jpg);
+    background-image: url(../img/about/about-school.jpg);
   }
 }
 
