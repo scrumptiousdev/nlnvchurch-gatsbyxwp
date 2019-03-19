@@ -8,6 +8,10 @@ html {
   font-size: 10px;
 }
 
+p {
+  font-size: 1.6rem;
+}
+
 a:focus {
   outline: none;
 }
@@ -297,6 +301,9 @@ body.loaded {
 }
 
 @media screen and (max-width: 414px) {
+  .card__cta .popup-content {
+    width: 90% !important;
+  }
   .white-popup {
     padding: 3rem;
   }

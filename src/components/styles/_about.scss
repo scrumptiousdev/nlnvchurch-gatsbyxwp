@@ -3,7 +3,6 @@
   width: 100%;
   height: 360px;
   padding-bottom: 60px;
-  background-image: url("../img/nlnv-about-banner.jpg");
   background-size: cover;
   background-position: center bottom;
   display: flex;
@@ -94,12 +93,15 @@
   		padding: 8rem 4rem;
 			background-color: $blue;
     }
+    &.active {
+      display: block;
+    }
   }
   &-introduction {
     font-size: 1.6rem;
     line-height: 1.5;
   }
-  &-icon .fa {
+  &-icon {
     font-size: 2.5rem;
   }
 }
