@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import moment from 'moment';
+import moment from 'moment'
 import Layout from '../components/Layout'
 import NewsCard from '../components/NewsCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -73,11 +73,14 @@ export class HomePage extends Component {
         </div>
         <div className="home__container home__message clearfix">
           <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            <h2 className="home__message-title">{videos.nlnv_series.slug === 'series-5min' ? '5분' : '주일'} 설교영상</h2>
+            <h2 className="home__message-title">{videos.nlnv_series.slug === '5min' ? '5분' : '주일'} 설교영상</h2>
             <a className="home__message-btn kor-main js-transition" href="/series"><FontAwesomeIcon icon={faFilm} /> 영상 더보기</a>
             <iframe className="home__message-iframe" width="100%" height="500" src={`https://www.youtube.com/embed/${videos.nlnv_youtube_video_id}?rel=0`} frameBorder="0" allowFullScreen></iframe>
             <hr className="divider divider--green" />
             <div className="home__message-desc text-center kor-main">
+              {(videos.nlnv_series.slug !== '5min' && videos.nlnv_series.slug !== 'etc') ? (
+                <p>{`${videos.nlnv_series.name} 시리즈 #${videos.nlnv_series_number}`}</p>
+              ) : null}
               <p>{videos.nlnv_video_title_korean}</p>
               <p>{videos.nlnv_video_title_english}</p>
               <p>{videos.nlnv_scripture}</p>
@@ -181,8 +184,8 @@ export const pageQuery = graphql`
             nlnv_video_title_korean
             nlnv_video_title_english
             nlnv_scripture
+            nlnv_series_number
             nlnv_series {
-              term_id
               name
               slug
             }

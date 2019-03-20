@@ -6,11 +6,8 @@ import Layout from '../components/Layout'
 
 export const BlogPostTemplate = ({
   content,
-  categories,
-  tags,
   title,
   date,
-  author,
 }) => {
   return (
     <section className="section">
@@ -24,34 +21,7 @@ export const BlogPostTemplate = ({
             <div style={{ marginTop: `4rem` }}>
               <p>
                 {date} - posted by{' '}
-                <Link to={`/author/${author.slug}`}>{author.name}</Link>
               </p>
-              {categories && categories.length ? (
-                <div>
-                  <h4>Categories</h4>
-                  <ul className="taglist">
-                    {categories.map(category => (
-                      <li key={`${category.slug}cat`}>
-                        <Link to={`/categories/${category.slug}/`}>
-                          {category.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-              {tags && tags.length ? (
-                <div>
-                  <h4>Tags</h4>
-                  <ul className="taglist">
-                    {tags.map(tag => (
-                      <li key={`${tag.slug}tag`}>
-                        <Link to={`/tags/${tag.slug}/`}>{tag.name}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
             </div>
           </div>
         </div>
@@ -73,11 +43,8 @@ const BlogPost = ({ data }) => {
       <Helmet title={`${post.title} | Blog`} />
       <BlogPostTemplate
         content={post.content}
-        categories={post.categories}
-        tags={post.tags}
         title={post.title}
         date={post.date}
-        author={post.author}
       />
     </Layout>
   )
@@ -106,18 +73,6 @@ export const pageQuery = graphql`
       slug
       content
       date(formatString: "MMMM DD, YYYY")
-      categories {
-        name
-        slug
-      }
-      tags {
-        name
-        slug
-      }
-      author {
-        name
-        slug
-      }
     }
   }
 `

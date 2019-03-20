@@ -6,12 +6,14 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 class NewsCard extends Component {
   render() {
     const { news } = this.props;
+    const newsCount = news.length;
 
-    return news.map(singleNews => {
+    return news.map((singleNews, i) => {
       const currentNews = singleNews.node.acf;
+      const gridOffset = i === 0 ? ` offset-md-${(12 - 4 * newsCount) / 2}` : '';
 
       return (
-        <div className="card__col col-sm-6 col-md-4" key={`newsCard-${singleNews.node.id}`}>
+        <div className={`card__col col-sm-6 col-md-4${gridOffset}`} key={`newsCard-${singleNews.node.id}`}>
           <div className="card__container">
             <div className="card__thumbnail">
               <div className="card__image" style={{backgroundImage: `url(${currentNews.nlnv_news_image.source_url})`}} />
