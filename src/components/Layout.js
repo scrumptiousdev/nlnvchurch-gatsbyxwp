@@ -8,11 +8,19 @@ import favicon from '../img/favicon.ico'
 
 class TemplateWrapper extends Component {
   componentDidMount() {
-    document.body.classList.add('loaded')
-  }
+    setTimeout(() => document.body.classList.add('loaded'), 250)
+    const linkElem = document.querySelectorAll('.js-transition')
 
-  componentWillUnmount() {
-    document.body.classList.remove('loaded')
+    Array.from(linkElem).forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const linkHref = link.getAttribute('href')
+        document.body.classList.remove('loaded')
+        setTimeout(() => {
+          document.location.href = linkHref
+        }, 500)
+      });
+    })
   }
 
   render() {

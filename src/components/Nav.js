@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faLeaf, faQuoteRight, faBullhorn, faCameraRetro, faHeart, faMapSigns } from '@fortawesome/free-solid-svg-icons'
 
-class Navbar extends Component {
+class Nav extends Component {
   state = {
     menuOpen: false
   }
@@ -92,4 +92,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar
+export default Nav

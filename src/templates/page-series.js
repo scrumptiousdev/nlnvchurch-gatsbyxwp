@@ -33,9 +33,6 @@ class SeriesPage extends Component {
                   <p>{latestMessage.nlnv_scripture}</p>
                 </div>
                 <a className="nlnv__btn kor-main js-transition" href={`/series/${latestMessage.nlnv_series.slug}`}><FontAwesomeIcon icon={faHashtag} /> {latestMessage.nlnv_series.name} 시리즈 더보기</a>
-                <div>
-                  <a className="nlnv__btn nlnv__btn--solid kor-main js-transition" href="/messages"><FontAwesomeIcon icon={faHashtag} /> 모든 영상 보기</a>
-                </div>
               </div>
             </div>
           </div>

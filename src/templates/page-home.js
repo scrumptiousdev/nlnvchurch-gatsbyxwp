@@ -82,7 +82,7 @@ export class HomePage extends Component {
                 <p>{`${videos.nlnv_series.name} 시리즈 #${videos.nlnv_series_number}`}</p>
               ) : null}
               <p>{videos.nlnv_video_title_korean}</p>
-              <p>{videos.nlnv_video_title_english}</p>
+              {videos.nlnv_video_title_english !== '' && <p>{videos.nlnv_video_title_english}</p>}
               <p>{videos.nlnv_scripture}</p>
               <p>{moment(videos.nlnv_video_date).format('MMM DD, YYYY')}</p>
             </div>

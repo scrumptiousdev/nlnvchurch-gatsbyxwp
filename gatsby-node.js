@@ -48,38 +48,38 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
   }).then(() => {
-    return graphql(`
-      {
-        allWordpressPost {
-          edges {
-            node {
-              id
-              slug
-              status
-            }
+    return graphql(`{
+      allWordpressWpSeries(
+        sort: {
+          fields: name
+          order: ASC
+        }
+      ) {
+        edges {
+          node {
+            name
+            slug
+            count
           }
         }
       }
-    `)
+    }`)
   }).then(result => {
     if (result.errors) {
       result.errors.forEach(e => console.error(e.toString()))
       return Promise.reject(result.errors)
     }
 
-    const postTemplate = path.resolve(`./src/templates/post.js`)
-    const allPosts = result.data.allWordpressPost.edges
-    const posts =
-      process.env.NODE_ENV === 'production'
-        ? getOnlyPublished(allPosts)
-        : allPosts
+    const seriesTemplate = path.resolve(`./src/templates/single-series.js`)
+    const allSeries = result.data.allWordpressWpSeries.edges
+    const series = process.env.NODE_ENV === 'production' ? getOnlyPublished(allSeries) : allSeries
 
-    _.each(posts, ({ node: post }) => {
+    _.each(series, ({ node: singleSeries }) => {
       createPage({
-        path: `/${post.slug}/`,
-        component: postTemplate,
+        path: `/series/${singleSeries.slug}/`,
+        component: seriesTemplate,
         context: {
-          id: post.id,
+          id: singleSeries.slug,
         },
       })
     })
