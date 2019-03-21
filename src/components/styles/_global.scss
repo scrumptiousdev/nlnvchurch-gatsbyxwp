@@ -300,6 +300,10 @@ body.loaded {
   }
 }
 
+.card__cta .popup-content {
+  max-width: 550px;
+}
+
 @media screen and (max-width: 414px) {
   .card__cta .popup-content {
     width: 90% !important;

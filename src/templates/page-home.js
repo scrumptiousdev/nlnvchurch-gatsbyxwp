@@ -92,11 +92,7 @@ export class HomePage extends Component {
           <div className="col-md-12 col-lg-10 offset-lg-1 text-center">
             <h2 className="nlnv__heading">교회 소식</h2>
             <hr className="divider divider--gold divider--margin-b-lg" />
-            <div className="container">
-              <div className="row">
-                <NewsCard news={news} />
-              </div>
-            </div>
+            <NewsCard news={news} />
           </div>
         </div>
         <div className="connect__container">
