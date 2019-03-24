@@ -138,7 +138,7 @@ Page.propTypes = {
 export default Page
 
 export const pageQuery = graphql`
-  query HomePage($id: String!) {
+  query HomePage {
     allWordpressPage(
       filter: {
         slug: {
