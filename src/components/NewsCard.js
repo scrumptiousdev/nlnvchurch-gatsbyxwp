@@ -16,7 +16,7 @@ class NewsCard extends Component {
             const gridOffset = i === 0 ? ` offset-md-${(12 - 4 * newsCount) / 2}` : '';
 
             return (
-              <div className={`card__col col-sm-6 col-md-4${gridOffset}`} key={`newsCard-${singleNews.node.id}`}>
+              <div className={`card__col col-sm-6 col-md-4${gridOffset}`} key={`newsCard-${currentNews.nlnv_news_date}-${i}`}>
                 <div className="card__container">
                   <div className="card__thumbnail">
                     <div className="card__image" style={{backgroundImage: `url(${currentNews.nlnv_news_image.source_url})`}} />

@@ -85,6 +85,99 @@ exports.createPages = ({ actions, graphql }) => {
         },
       })
     })
+  }).then(() => {
+    return graphql(`{
+      allWordpressAcfBulletin(
+        sort: {
+          fields: acf___date
+          order: DESC
+        }
+      ) {
+        edges {
+          node {
+            acf {
+              date
+              version
+              poster {
+                source_url
+              }
+              pdf_file {
+                source_url
+              }
+            }
+          }
+        }
+      }
+    }`)
+  }).then(result => {
+    if (result.errors) {
+      result.errors.forEach(e => console.error(e.toString()))
+      return Promise.reject(result.errors)
+    }
+
+    const postBulletinsTemplate = path.resolve(`./src/templates/post-bulletins.js`)
+    const allBulletins = result.data.allWordpressAcfBulletin.edges
+    const bulletins = process.env.NODE_ENV === 'production' ? getOnlyPublished(allBulletins) : allBulletins
+
+    createPage({
+      path: `/bulletins`,
+      component: postBulletinsTemplate,
+      context: {
+        bulletins
+      }
+    })
+  }).then(() => {
+    return graphql(`{
+      allWordpressWpGallery(
+        sort: {
+          fields: acf___gallery_date
+          order: DESC
+        }
+      ) {
+        nodes {
+          wordpress_id
+          title
+          date
+          acf {
+            gallery_title
+            gallery_url
+            gallery_date
+            main_image {
+              source_url
+            }
+          }
+        }
+      }
+    }`)
+  }).then(result => {
+    if (result.errors) {
+      result.errors.forEach(e => console.error(e.toString()))
+      return Promise.reject(result.errors)
+    }
+
+    const albumTemplate = path.resolve(`./src/templates/page-album.js`)
+    const singleAlbumTemplate = path.resolve(`./src/templates/single-album.js`)
+    const allAlbums = result.data.allWordpressWpGallery.nodes
+    const albums = process.env.NODE_ENV === 'production' ? getOnlyPublished(allAlbums) : allAlbums
+
+    createPage({
+      path: `/album`,
+      component: albumTemplate,
+      context: {
+        albums
+      }
+    })
+
+    _.each(albums, ({ wordpress_id: id, acf: { gallery_url: galleryUrl, gallery_title: title } }) => {
+      createPage({
+        path: `/album/${galleryUrl}/`,
+        component: singleAlbumTemplate,
+        context: {
+          id,
+          title
+        },
+      })
+    })
   })
 }
 

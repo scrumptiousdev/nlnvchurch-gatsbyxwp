@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronRight, faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import Layout from '../components/Layout'
 import NewsCard from '../components/NewsCard'
+import BulletinCard from '../components/BulletinCard'
 
 class NewsPage extends Component {
   render() {
@@ -28,24 +28,7 @@ class NewsPage extends Component {
           <hr className="divider divider--green" />
           <a className="nlnv__btn kor-main margin-top-none js-transition" href="/bulletins"><FontAwesomeIcon icon={faChevronRight} /> 지난 주보 보기</a>
           <div className="col-md-12 col-lg-10 offset-lg-1 text-center margin-top-xl">
-            <div className="container-fluid">
-              <div className="row">
-                {bulletins.map(bulletin => {
-                  const singleBulletin = bulletin.node.acf;
-
-                  return (
-                    <div className="col-sm-3 col-xs-6 bulletin__card" key={`${singleBulletin.date}${singleBulletin.version}`}>
-                      <a href={singleBulletin.pdf_file.source_url} className="bulletin__card-img-wrap" target="_blank" rel="noopener noreferrer">
-                        <FontAwesomeIcon className="bulletin__card-icon" icon={faDownload} />
-                        <img className="bulletin__card-img" src={singleBulletin.poster.source_url} alt="" />
-                      </a>
-                      <p className="bulletin__card-title kor-main">{moment(singleBulletin.date).format('MMM DD, YYYY')}</p>
-                      <p className="bulletin__card-title kor-main">{singleBulletin.version}</p>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
+            <BulletinCard bulletins={bulletins} />
           </div>
         </div>
       </>
