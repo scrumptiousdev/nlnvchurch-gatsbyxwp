@@ -141,8 +141,8 @@ export const pageQuery = graphql`
   query HomePage($id: String!) {
     allWordpressPage(
       filter: {
-        id: {
-          in: [$id, "4335bc5c-e4aa-50ae-98a7-0c36e4e8004f"]
+        slug: {
+          in: ["home", "contact-and-social-setting"]
         }
       }
       sort: {
