@@ -21,7 +21,7 @@ module.exports = {
           "**/media",
           "**/series",
           "**/news",
-          "**/gallery",
+          // "**/gallery",
         ],
       },
     },
