@@ -7,21 +7,7 @@ import { faHandshake, faChild, faGlobe, faEnvelope, faPhone } from '@fortawesome
 
 class AboutPage extends Component {
   state = {
-    activeTab: 1,
-    staffActiveCount: 0
-  }
-
-  componentDidMount() {
-    const { acf: { nlnv_about_tabs } } = this.props;
-
-    let staffActiveNumber = 0;
-
-    for(let x = 1; x < 5; x++) {
-      const activeStatus = nlnv_about_tabs[`nlnv_about_staff_${x}`]['nlnv_staff_active'];
-      if (activeStatus) staffActiveNumber++;
-    }
-
-    this.setState({ staffActiveCount: staffActiveNumber });
+    activeTab: 1
   }
 
   handleTabClick = (tab) => {
@@ -32,7 +18,7 @@ class AboutPage extends Component {
   }
 
   render() {
-    const { activeTab, staffActiveCount } = this.state;
+    const { activeTab } = this.state;
     const { acf: { nlnv_page_title, nlnv_hero_image, nlnv_about_tabs, nlnv_about_service_grid } } = this.props;
 
     return (
@@ -85,7 +71,7 @@ class AboutPage extends Component {
               <div className="about__tab-content-wrapper kor-main">
                 <div className="container-fluid">
                   <div className="row">
-                    <div className={`col-md-${12 / staffActiveCount}`}>
+                    <div className="col-md-3">
                       <img className="about__tab-image" src={nlnv_about_tabs.nlnv_about_staff_1.nlnv_about_staff_photo.source_url} alt="" />
                       <p className="nlnv__subheading divider--wrap text--gold margin-top-sm">{nlnv_about_tabs.nlnv_about_staff_1.nlnv_about_staff_title}</p>
                       <div className="about__tab-introduction margin-bottom-lg-max-desktop">
@@ -94,7 +80,7 @@ class AboutPage extends Component {
                         {nlnv_about_tabs.nlnv_about_staff_1.nlnv_about_staff_phone !== '' && <a className="about__tab-icon text-link" href={`tel:${nlnv_about_tabs.nlnv_about_staff_1.nlnv_about_staff_phone}`}><FontAwesomeIcon icon={faPhone} /></a>}
                       </div>
                     </div>
-                    <div className={`col-md-${12 / staffActiveCount}`}>
+                    <div className="col-md-3">
                       <img className="about__tab-image" src={nlnv_about_tabs.nlnv_about_staff_2.nlnv_about_staff_photo.source_url} alt="" />
                       <p className="nlnv__subheading divider--wrap text--gold margin-top-sm">{nlnv_about_tabs.nlnv_about_staff_2.nlnv_about_staff_title}</p>
                       <div className="about__tab-introduction margin-bottom-lg-max-desktop">
@@ -103,7 +89,7 @@ class AboutPage extends Component {
                         {nlnv_about_tabs.nlnv_about_staff_2.nlnv_about_staff_phone !== '' && <a className="about__tab-icon text-link" href={`tel:${nlnv_about_tabs.nlnv_about_staff_2.nlnv_about_staff_phone}`}><FontAwesomeIcon icon={faPhone} /></a>}
                       </div>
                     </div>
-                    <div className={`col-md-${12 / staffActiveCount}`}>
+                    <div className="col-md-3">
                       <img className="about__tab-image" src={nlnv_about_tabs.nlnv_about_staff_3.nlnv_about_staff_photo.source_url} alt="" />
                       <p className="nlnv__subheading divider--wrap text--gold margin-top-sm">{nlnv_about_tabs.nlnv_about_staff_3.nlnv_about_staff_title}</p>
                       <div className="about__tab-introduction margin-bottom-lg-max-desktop">
@@ -112,7 +98,7 @@ class AboutPage extends Component {
                         {nlnv_about_tabs.nlnv_about_staff_3.nlnv_about_staff_phone !== '' && <a className="about__tab-icon text-link" href={`tel:${nlnv_about_tabs.nlnv_about_staff_3.nlnv_about_staff_phone}`}><FontAwesomeIcon icon={faPhone} /></a>}
                       </div>
                     </div>
-                    <div className={`col-md-${12 / staffActiveCount}`}>
+                    <div className="col-md-3">
                       <img className="about__tab-image" src={nlnv_about_tabs.nlnv_about_staff_4.nlnv_about_staff_photo.source_url} alt="" />
                       <p className="nlnv__subheading divider--wrap text--gold margin-top-sm">{nlnv_about_tabs.nlnv_about_staff_4.nlnv_about_staff_title}</p>
                       <div className="about__tab-introduction">
@@ -212,7 +198,6 @@ export const pageQuery = graphql`
           nlnv_about_resume
           nlnv_about_tab_3_title
           nlnv_about_staff_1 {
-            nlnv_staff_active
             nlnv_about_staff_title
             nlnv_about_staff_name
             nlnv_about_staff_email
@@ -222,7 +207,6 @@ export const pageQuery = graphql`
             }
           }
           nlnv_about_staff_2 {
-            nlnv_staff_active
             nlnv_about_staff_title
             nlnv_about_staff_name
             nlnv_about_staff_email
@@ -232,7 +216,6 @@ export const pageQuery = graphql`
             }
           }
           nlnv_about_staff_3 {
-            nlnv_staff_active
             nlnv_about_staff_title
             nlnv_about_staff_name
             nlnv_about_staff_email
@@ -242,7 +225,6 @@ export const pageQuery = graphql`
             }
           }
           nlnv_about_staff_4 {
-            nlnv_staff_active
             nlnv_about_staff_title
             nlnv_about_staff_name
             nlnv_about_staff_email
