@@ -121,7 +121,7 @@ exports.createPages = ({ actions, graphql }) => {
       path: `/bulletins`,
       component: postBulletinsTemplate,
       context: {
-        allBulletins
+        bulletins: allBulletins
       }
     })
   })
