@@ -124,6 +124,57 @@ exports.createPages = ({ actions, graphql }) => {
         bulletins: allBulletins
       }
     })
+  }).then(() => {
+    return graphql(`{
+      allWordpressWpGallery(
+        sort: {
+          fields: acf___gallery_date
+          order: DESC
+        }
+      ) {
+        nodes {
+          wordpress_id
+          title
+          date
+          acf {
+            gallery_title
+            gallery_url
+            gallery_date
+            main_image {
+              source_url
+            }
+          }
+        }
+      }
+    }`)
+  }).then(result => {
+    if (result.errors) {
+      result.errors.forEach(e => console.error(e.toString()))
+      return Promise.reject(result.errors)
+    }
+
+    const albumTemplate = path.resolve(`./src/templates/page-album.js`)
+    const singleAlbumTemplate = path.resolve(`./src/templates/single-album.js`)
+    const allAlbums = result.data.allWordpressWpGallery.nodes
+
+    createPage({
+      path: `/album`,
+      component: albumTemplate,
+      context: {
+        albums: allAlbums
+      }
+    })
+
+    _.each(allAlbums, ({ wordpress_id: id, acf: { gallery_url: galleryUrl, gallery_title: title } }) => {
+      createPage({
+        path: `/album/${galleryUrl}/`,
+        component: singleAlbumTemplate,
+        context: {
+          id,
+          title
+        },
+      })
+    })
   })
 }
 
