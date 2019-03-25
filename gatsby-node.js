@@ -116,13 +116,12 @@ exports.createPages = ({ actions, graphql }) => {
 
     const postBulletinsTemplate = path.resolve(`./src/templates/post-bulletins.js`)
     const allBulletins = result.data.allWordpressAcfBulletin.edges
-    const bulletins = process.env.NODE_ENV === 'production' ? getOnlyPublished(allBulletins) : allBulletins
 
     createPage({
       path: `/bulletins`,
       component: postBulletinsTemplate,
       context: {
-        bulletins
+        allBulletins
       }
     })
   })
