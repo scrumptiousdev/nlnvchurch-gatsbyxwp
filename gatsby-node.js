@@ -74,9 +74,8 @@ exports.createPages = ({ actions, graphql }) => {
 
     const seriesTemplate = path.resolve(`./src/templates/single-series.js`)
     const allSeries = result.data.allWordpressWpSeries.edges
-    const series = process.env.NODE_ENV === 'production' ? getOnlyPublished(allSeries) : allSeries
 
-    _.each(series, ({ node: singleSeries }) => {
+    _.each(allSeries, ({ node: singleSeries }) => {
       createPage({
         path: `/series/${singleSeries.slug}/`,
         component: seriesTemplate,
