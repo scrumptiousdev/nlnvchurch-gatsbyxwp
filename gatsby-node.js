@@ -138,9 +138,7 @@ exports.createPages = ({ actions, graphql }) => {
             gallery_title
             gallery_url
             gallery_date
-            main_image {
-              source_url
-            }
+            gallery_images
           }
         }
       }

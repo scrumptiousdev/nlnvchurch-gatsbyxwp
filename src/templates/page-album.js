@@ -23,14 +23,22 @@ class AlbumPage extends Component {
           <div className="album__wrapper">
             <Masonry options={masonryOptions}>
               {albums.map(album => {
-                const { wordpress_id: id, acf: { gallery_title: galleryTitle, gallery_url: galleryUrl, gallery_date: galleryDate, main_image: { source_url: mainPhoto } } } = album;
+                const { wordpress_id: id, acf: { gallery_title: galleryTitle, gallery_url: galleryUrl, gallery_date: galleryDate, gallery_images: galleryImages } } = album;
+
+                const elem = document.createElement("div")
+                elem.innerHTML = galleryImages
+                const imageStrings = elem.getElementsByTagName("img")
+                let currentImg = imageStrings[0].src
+                const imgRegex = /-(\d*)x(\d*)/
+                const checkRegex = imgRegex.exec(currentImg)
+                if (checkRegex) currentImg = currentImg.replace(checkRegex[0], '')
 
                 return (
                   <div className="album__card col-xs-12 col-sm-6 col-md-4" key={id}>
                     <a href={`/album/${galleryUrl}`} className="album__card-inner js-transition">
                       <div className="album__card-img-wrapper">
                         <FontAwesomeIcon className="album__card-icon" icon={faImages} />
-                        <img className="album__card-img" src={mainPhoto} alt="" />
+                        <img className="album__card-img" src={currentImg} alt="" />
                       </div>
                       <div className="album__card-content">
                         <h2 className="album__card-title kor-main">{galleryTitle}</h2>

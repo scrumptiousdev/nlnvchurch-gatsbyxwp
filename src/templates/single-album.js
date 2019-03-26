@@ -12,12 +12,12 @@ class SingleAlbumPage extends Component {
   }
 
   componentDidMount() {
-    const elem= document.createElement("div")
+    const elem = document.createElement("div")
     elem.innerHTML = this.props.album.gallery_images
     const imageStrings = elem.getElementsByTagName("img")
     let images = []
     for (let i = 0; i < imageStrings.length; i++) {
-      const currentImg = imageStrings[i].src
+      let currentImg = imageStrings[i].src
       const imgRegex = /-(\d*)x(\d*)/
       const checkRegex = imgRegex.exec(currentImg)
       if (checkRegex) currentImg = currentImg.replace(checkRegex[0], '')
