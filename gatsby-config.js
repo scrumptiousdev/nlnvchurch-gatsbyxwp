@@ -20,8 +20,6 @@ module.exports = {
           "**/pages",
           "**/media",
           "**/series",
-          "**/news",
-          "**/gallery",
         ],
       },
     },

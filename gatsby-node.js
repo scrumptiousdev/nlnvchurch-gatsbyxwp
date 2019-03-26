@@ -126,7 +126,7 @@ exports.createPages = ({ actions, graphql }) => {
     })
   }).then(() => {
     return graphql(`{
-      allWordpressWpGallery(
+      allWordpressAcfAlbums(
         sort: {
           fields: acf___gallery_date
           order: DESC
@@ -134,8 +134,6 @@ exports.createPages = ({ actions, graphql }) => {
       ) {
         nodes {
           wordpress_id
-          title
-          date
           acf {
             gallery_title
             gallery_url
@@ -155,7 +153,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     const albumTemplate = path.resolve(`./src/templates/page-album.js`)
     const singleAlbumTemplate = path.resolve(`./src/templates/single-album.js`)
-    const allAlbums = result.data.allWordpressWpGallery.nodes
+    const allAlbums = result.data.allWordpressAcfAlbums.nodes
 
     createPage({
       path: `/album`,
@@ -165,13 +163,12 @@ exports.createPages = ({ actions, graphql }) => {
       }
     })
 
-    _.each(allAlbums, ({ wordpress_id: id, acf: { gallery_url: galleryUrl, gallery_title: title } }) => {
+    _.each(allAlbums, ({ wordpress_id: id, acf: { gallery_url: galleryUrl } }) => {
       createPage({
         path: `/album/${galleryUrl}/`,
         component: singleAlbumTemplate,
         context: {
-          id,
-          title
+          id
         },
       })
     })
