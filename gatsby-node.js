@@ -39,6 +39,10 @@ exports.createPages = ({ actions, graphql }) => {
         pageTemplatePath = `./src/templates/page-series.js`
       } else if (page.slug && page.slug === 'news') {
         pageTemplatePath = `./src/templates/page-news.js`
+      } else if (page.slug && page.slug === 'directions') {
+        pageTemplatePath = `./src/templates/page-directions.js`
+      } else if (page.slug && page.slug === 'support') {
+        pageTemplatePath = `./src/templates/page-support.js`
       }
 
       createPage({
